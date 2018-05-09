@@ -1,0 +1,24 @@
+<a href="{% url 'ingresa_libro' %}">Nuevo Libro</a>
+
+<form action="" method="get">
+    {% csrf_token %}
+    <label for="id_buscar">Buscar</label>
+    <input type="text" id="id_buscar" name="buscar" placeholder="Buscar por título">
+    <button type="submit">Buscar</button>
+</form>
+<table border="1">
+    <tr>
+        <td>titulo</td>
+        <td>editorial</td>
+        <td>autor</td>
+        <td>-</td>
+    </tr>
+    {% for libro in libros %}
+    <tr>
+        <td>{{ libro.titulo }}</td>
+        <td>{{ libro.editorial }}</td>
+        <td>{{ libro.autor.all|join:', ' }}</td>
+        <td><a href="{% url 'edita_libro' libro.pk %}">Edita</a>, <a href="{% url 'borrar_libro' libro.pk %}">Elimina</a></td>
+    </tr>
+    {% endfor %}
+</table>
